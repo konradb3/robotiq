@@ -44,7 +44,7 @@ This serves as an example for publishing messages on the 'SModelRobotOutput' top
 
 import roslib; roslib.load_manifest('robotiq_s_model_control')
 import rospy
-from robotiq_s_model_control.msg import _SModel_robot_output  as outputMsg
+from robotiq_s_model_articulated_msgs.msg import SModelRobotOutput  as outputMsg
 from time import sleep
 
 
@@ -52,14 +52,14 @@ def genCommand(char, command):
     """Update the command according to the character entered by the user."""    
         
     if char == 'a':
-        command = outputMsg.SModel_robot_output();
+        command = outputMsg();
         command.rACT = 1
         command.rGTO = 1
         command.rSPA = 255
         command.rFRA = 150
 
     if char == 'r':
-        command = outputMsg.SModel_robot_output();
+        command = outputMsg();
         command.rACT = 0
 
     if char == 'c':
@@ -166,9 +166,9 @@ def publisher():
 
     rospy.init_node('SModelSimpleController')
     
-    pub = rospy.Publisher('SModelRobotOutput', outputMsg.SModel_robot_output)
+    pub = rospy.Publisher('SModelRobotOutput', outputMsg)
 
-    command = outputMsg.SModel_robot_output();
+    command = outputMsg();
 
     while not rospy.is_shutdown():
 
